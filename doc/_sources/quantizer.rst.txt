@@ -1,0 +1,5 @@
+
+.. autoclass:: quantizer.QuantizeType
+
+    :members: asymu8
+

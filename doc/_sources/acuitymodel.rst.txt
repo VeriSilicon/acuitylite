@@ -1,0 +1,8 @@
+
+.. autoclass:: acuitymodel.AcuityModel
+
+    .. automethod:: __init__
+
+    .. automethod:: quantize
+
+    .. automethod:: inference
