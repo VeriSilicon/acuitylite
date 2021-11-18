@@ -2,18 +2,16 @@
 
 Acuitylite is an end-to-end neural-network deployment tool for embedded systems.<br/>
 Acuitylite support converting caffe/tflite model to TIM-VX case.
-In addition, Acuitylite support asysmetric uint8 qutization.
+In addition, Acuitylite support asymmetric uint8 qutization.
 
 ### System Requirement
-Processor: Intel Core i5-6500 CPU @ 3.20GHz x 4 (need to support the avx instruction set)
-Memory: 4GB RAM (at least)
 OS:  Ubuntu Linux 20.04 LTS 64-bit (recommend)
 
 ### Install
     pip install acuitylite
 
 ### Document
-    Reference: https://github.com/VeriSilicon/acuitylite/doc/index.html
+    Reference: https://verisilicon.github.io/acuitylite/
 
 ### Framework Support
 - Importer:
