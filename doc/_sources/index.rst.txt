@@ -1,0 +1,40 @@
+.. Acuitylite documentation master file, created by
+   sphinx-quickstart on Fri Oct 29 10:33:40 2021.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to acuitylite's documentation!
+=======================================
+
+Acuitylite is an end-to-end neural-network deployment tool for embedded systems.
+Acuitylite support converting caffe/tflite model to TIM-VX case.
+In addition, Acuitylite support asysmetric uint8 qutization.
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`search`
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Guide
+
+   README.md
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API Reference
+
+   api
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Demo
+
+   demo_caffe
+   demo_tflite
+
+Support
+=======
+create issue on github or email to ML_Support@verisilicon.com

@@ -1,0 +1,5 @@
+demo.caffe
+==========
+
+.. literalinclude:: ../demo/lenet_caffe.py
+    :language: python
