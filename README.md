@@ -5,7 +5,8 @@ Acuitylite support converting caffe/tflite model to TIM-VX case.
 In addition, Acuitylite support asymmetric uint8 qutization.
 
 ### System Requirement
-OS:  Ubuntu Linux 20.04 LTS 64-bit (recommend)
+- OS:  Ubuntu Linux 20.04 LTS 64-bit (recommend)
+- Python Version:  python3.8 (needed)
 
 ### Install
     pip install acuitylite
