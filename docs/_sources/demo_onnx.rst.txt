@@ -1,0 +1,5 @@
+demo.onnx
+=========
+
+.. literalinclude:: ../demo/squeezenet_onnx_test.py
+    :language: python

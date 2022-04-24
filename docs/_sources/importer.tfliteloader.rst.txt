@@ -1,0 +1,6 @@
+
+.. autoclass:: importer.TFLiteLoader
+
+    .. automethod:: __init__
+
+    .. automethod:: load

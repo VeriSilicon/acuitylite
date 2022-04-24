@@ -2,4 +2,5 @@
 .. autoclass:: quantizer.QuantizeType
 
     :members: asymu8
+    :members: pcq_symi8
 

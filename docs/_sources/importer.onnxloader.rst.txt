@@ -1,0 +1,7 @@
+
+.. autoclass:: importer.OnnxLoader
+
+    .. automethod:: __init__
+
+    .. automethod:: load
+

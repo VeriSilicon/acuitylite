@@ -1,0 +1,7 @@
+
+.. autoclass:: exporter.TFLiteExporter
+
+    .. automethod:: __init__
+
+    .. automethod:: export
+

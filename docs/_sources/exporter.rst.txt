@@ -1,7 +1,0 @@
-
-.. autoclass:: exporter.TimVxExporter
-
-    .. automethod:: __init__
-
-    .. automethod:: export
-

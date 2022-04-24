@@ -19,7 +19,14 @@ Importer
 
         importer.caffeloader
 
-.. autosummary:: importer.TFliteLoader
+.. autosummary:: importer.OnnxLoader
+
+    .. toctree::
+       :maxdepth: 2
+
+        importer.onnxloader
+
+.. autosummary:: importer.TFLiteLoader
 
     .. toctree::
        :maxdepth: 2
@@ -37,9 +44,16 @@ Quantizer
 
 Exporter
 --------
+.. autosummary:: exporter.TFLiteExporter
+
+    .. toctree::
+       :maxdepth: 2
+
+        exporter.tflite
+
 .. autosummary:: exporter.TimVxExporter
 
     .. toctree::
        :maxdepth: 2
 
-        exporter
+        exporter.tim-vx
