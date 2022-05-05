@@ -61,7 +61,7 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="importer.caffeloader.html#importer.CaffeLoader" title="importer.CaffeLoader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">importer.CaffeLoader</span></code></a>(model[, weights])</p></td>
-<td><p>Translates a Caffe model to ACUITY formats.</p></td>
+<td><p>Translates a Caffe model to Acuity formats.</p></td>
 </tr>
 </tbody>
 </table>
@@ -71,8 +71,19 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="importer.tflite.html#importer.TFliteLoader" title="importer.TFliteLoader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">importer.TFliteLoader</span></code></a>(model[, inputs, ...])</p></td>
-<td><p>Translates a TensorFlow Lite model to acuitylite formats.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="importer.onnxloader.html#importer.OnnxLoader" title="importer.OnnxLoader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">importer.OnnxLoader</span></code></a>(model[, inputs, ...])</p></td>
+<td><p>Translates a Onnx model to Acuity formats.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="importer.tfliteloader.html#importer.TFLiteLoader" title="importer.TFLiteLoader"><code class="xref py py-obj docutils literal notranslate"><span class="pre">importer.TFLiteLoader</span></code></a>(model[, inputs, ...])</p></td>
+<td><p>Translates a TensorFlow Lite model to ACUITY formats.</p></td>
 </tr>
 </tbody>
 </table>
@@ -86,7 +97,7 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="quantizer.html#quantizer.QuantizeType" title="quantizer.QuantizeType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantizer.QuantizeType</span></code></a>()</p></td>
-<td><p>Quantizer type for AcuityModel quantize method quantizer param</p></td>
+<td><p>Quantizer type for AcuityModel quantize method quantizer param, asymu8 = ASYMMETRIC_AFFINE_UINT8, pcq_symi8 = PERCHANNEL_SYMMETRIC_AFFINE_INT8</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantizer</span></code></p></td>
 <td><p></p></td>
@@ -102,11 +113,19 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="exporter.html#exporter.TimVxExporter" title="exporter.TimVxExporter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exporter.TimVxExporter</span></code></a>(model)</p></td>
-<td><p>Export an acuitylite model into an TIM-VX application.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="exporter.tflite.html#exporter.TFLiteExporter" title="exporter.TFLiteExporter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exporter.TFLiteExporter</span></code></a>(model)</p></td>
+<td><p>Export an Acuity model into an TFLite application.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">exporter</span></code></p></td>
-<td><p></p></td>
+</tbody>
+</table>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="exporter.tim-vx.html#exporter.TimVxExporter" title="exporter.TimVxExporter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">exporter.TimVxExporter</span></code></a>(model)</p></td>
+<td><p>Export an Acuity model into an TIM-VX application.</p></td>
 </tr>
 </tbody>
 </table>
@@ -147,6 +166,7 @@
 <p class="caption" role="heading"><span class="caption-text">Demo</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="demo_caffe.html">demo.caffe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_onnx.html">demo.onnx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo_tflite.html">demo.tflite</a></li>
 </ul>
 
@@ -185,7 +205,7 @@
       &copy;2021, verisilicon.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

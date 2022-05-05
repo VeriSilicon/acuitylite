@@ -15,7 +15,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="demo.tflite" href="demo_tflite.html" />
+    <link rel="next" title="demo.onnx" href="demo_onnx.html" />
     <link rel="prev" title="API" href="api.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
@@ -35,11 +35,13 @@
             
   <section id="demo-caffe">
 <h1>demo.caffe<a class="headerlink" href="#demo-caffe" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">acuitylib.lite.acuitymodel</span> <span class="kn">import</span> <span class="n">AcuityModel</span>
 <span class="kn">from</span> <span class="nn">acuitylib.lite.importer</span> <span class="kn">import</span> <span class="n">CaffeLoader</span>
 <span class="kn">from</span> <span class="nn">acuitylib.lite.exporter</span> <span class="kn">import</span> <span class="n">TimVxExporter</span>
+<span class="kn">from</span> <span class="nn">acuitylib.lite.exporter</span> <span class="kn">import</span> <span class="n">TFLiteExporter</span>
 <span class="kn">from</span> <span class="nn">acuitylib.lite.quantizer</span> <span class="kn">import</span> <span class="n">QuantizeType</span>
 
 <span class="n">prototxt</span> <span class="o">=</span> <span class="s2">&quot;model/lenet.prototxt&quot;</span>
@@ -54,7 +56,7 @@
         <span class="c1"># arr = arr/255.0  # preprocess</span>
         <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">test_caffe_lenet</span><span class="p">():</span>
     <span class="c1"># load caffe model</span>
     <span class="n">importcaffe</span> <span class="o">=</span> <span class="n">CaffeLoader</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">prototxt</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">caffe_model</span><span class="p">)</span>
     <span class="n">acuitynet</span> <span class="o">=</span> <span class="n">importcaffe</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
@@ -69,10 +71,12 @@
 
     <span class="c1"># export tim-vx float16 case</span>
     <span class="n">TimVxExporter</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;export_timvx/float16/lenet&#39;</span><span class="p">)</span>
+    <span class="c1"># export tflite float16 case</span>
+    <span class="n">TFLiteExporter</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;export_tflite/float16/lenet.tflite&#39;</span><span class="p">)</span>
 
-    <span class="c1"># quantize</span>
+    <span class="c1"># quantize perchanneli8</span>
     <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_data</span><span class="p">()]</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">quantizer</span><span class="o">=</span><span class="n">QuantizeType</span><span class="o">.</span><span class="n">asymu8</span><span class="p">,</span> <span class="n">iteration</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">quantizer</span><span class="o">=</span><span class="n">QuantizeType</span><span class="o">.</span><span class="n">pcq_symi8</span><span class="p">,</span> <span class="n">iteration</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># inference with quantized model</span>
     <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_data</span><span class="p">()]</span>
@@ -81,11 +85,13 @@
         <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">outs</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">assert</span> <span class="n">outs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.99</span>
 
-    <span class="c1"># export tim-vx uint8 case</span>
-    <span class="n">TimVxExporter</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;export_timvx/uint8/lenet&#39;</span><span class="p">)</span>
+    <span class="c1"># export tim-vx perchanneli8 case</span>
+    <span class="n">TimVxExporter</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;export_timvx/pcq_symi8/lenet&#39;</span><span class="p">)</span>
+    <span class="c1"># export tflite perchanneli8 case</span>
+    <span class="n">TFLiteExporter</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;export_tflite/pcq_symi8/lenet.tflite&#39;</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
+    <span class="n">test_caffe_lenet</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>
@@ -118,6 +124,7 @@
 <p class="caption" role="heading"><span class="caption-text">Demo</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">demo.caffe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_onnx.html">demo.onnx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo_tflite.html">demo.tflite</a></li>
 </ul>
 
@@ -126,7 +133,7 @@
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="api.html" title="previous chapter">API</a></li>
-      <li>Next: <a href="demo_tflite.html" title="next chapter">demo.tflite</a></li>
+      <li>Next: <a href="demo_onnx.html" title="next chapter">demo.onnx</a></li>
   </ul></li>
 </ul>
 </div>
@@ -156,7 +163,7 @@
       &copy;2021, verisilicon.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
