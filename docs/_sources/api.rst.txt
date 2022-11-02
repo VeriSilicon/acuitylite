@@ -19,12 +19,26 @@ Importer
 
         importer.caffeloader
 
+.. autosummary:: importer.DarknetLoader
+
+    .. toctree::
+       :maxdepth: 2
+
+        importer.darknetloader
+
 .. autosummary:: importer.OnnxLoader
 
     .. toctree::
        :maxdepth: 2
 
         importer.onnxloader
+
+.. autosummary:: importer.TensorflowLoader
+
+    .. toctree::
+       :maxdepth: 2
+
+        importer.tensorflowloader
 
 .. autosummary:: importer.TFLiteLoader
 

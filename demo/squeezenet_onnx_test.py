@@ -46,6 +46,7 @@ def test_onnx_squeezenet():
     # export tim-vx case
     TimVxExporter(model).export('export_timvx/asymu8/squeezenet')
     TFLiteExporter(model).export('export_tflite/asymu8/squeezenet.tflite')
+    return 0
 
 if __name__ == '__main__':
     test_onnx_squeezenet()

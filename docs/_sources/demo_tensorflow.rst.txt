@@ -1,0 +1,5 @@
+demo.tensorflow
+=========
+
+.. literalinclude:: ../demo/mobilenet_tf_test.py
+    :language: python
