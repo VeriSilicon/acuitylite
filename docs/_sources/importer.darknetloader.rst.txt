@@ -1,0 +1,7 @@
+
+.. autoclass:: importer.DarknetLoader
+
+    .. automethod:: __init__
+
+    .. automethod:: load
+

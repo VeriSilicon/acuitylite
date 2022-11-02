@@ -33,7 +33,7 @@
             
   <dl class="py class">
 <dt class="sig sig-object py" id="importer.TFLiteLoader">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">importer.</span></span><span class="sig-name descname"><span class="pre">TFLiteLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_size_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importer.TFLiteLoader" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">importer.</span></span><span class="sig-name descname"><span class="pre">TFLiteLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_size_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importer.TFLiteLoader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Translates a TensorFlow Lite model to ACUITY formats.
 For quantized TensorFlow Lite models, do not quantize them again in acuitylite.
 if set inputs param, need to use input_size_list parameter at the same time.</p>
@@ -101,7 +101,9 @@ When this argument is omitted, acuitylite uses all tail points of this model.</p
 <p class="caption" role="heading"><span class="caption-text">Demo</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="demo_caffe.html">demo.caffe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_darknet.html">demo.daraknet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo_onnx.html">demo.onnx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_tensorflow.html">demo.tensorflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo_tflite.html">demo.tflite</a></li>
 </ul>
 
@@ -138,7 +140,7 @@ When this argument is omitted, acuitylite uses all tail points of this model.</p
       &copy;2021, verisilicon.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

@@ -13,7 +13,7 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -38,7 +38,7 @@
   <section class="tex2jax_ignore mathjax_ignore" id="a-brief-guide-to-acuitylite">
 <h1>A brief guide to Acuitylite<a class="headerlink" href="#a-brief-guide-to-acuitylite" title="Permalink to this headline">¶</a></h1>
 <p>Acuitylite is an end-to-end neural-network deployment tool for embedded systems.<br/>
-Acuitylite support converting caffe/onnx/tflite models to TIM-VX/TFLite cases.
+Acuitylite support converting caffe/darknet/onnx/tensorflow/tflite models to TIM-VX/TFLite cases.
 In addition, Acuitylite support asymmetric uint8 and symmetric int8 quantization.</p>
 <section id="system-requirement">
 <h2>System Requirement<a class="headerlink" href="#system-requirement" title="Permalink to this headline">¶</a></h2>
@@ -64,7 +64,9 @@ In addition, Acuitylite support asymmetric uint8 and symmetric int8 quantization
 <ul class="simple">
 <li><p>Importer:
 <a class="reference external" href="https://github.com/BVLC/caffe">Caffe</a>,
+<a class="reference external" href="https://github.com/pjreddie/darknet">Darknet</a>,
 <a class="reference external" href="https://github.com/onnx/onnx">Onnx</a>,
+<a class="reference external" href="https://github.com/tensorflow/tensorflow">Tensorflow</a>,
 <a class="reference external" href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite">TFLite</a></p></li>
 <li><p>Exporter:
 <a class="reference external" href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite">TFLite</a>,
@@ -127,7 +129,9 @@ You can refer <a class="reference external" href="https://github.com/VeriSilicon
 <p class="caption" role="heading"><span class="caption-text">Demo</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="demo_caffe.html">demo.caffe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_darknet.html">demo.daraknet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo_onnx.html">demo.onnx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demo_tensorflow.html">demo.tensorflow</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demo_tflite.html">demo.tflite</a></li>
 </ul>
 
@@ -166,7 +170,7 @@ You can refer <a class="reference external" href="https://github.com/VeriSilicon
       &copy;2021, verisilicon.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |

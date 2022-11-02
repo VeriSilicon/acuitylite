@@ -1,0 +1,6 @@
+
+.. autoclass:: importer.TensorflowLoader
+
+    .. automethod:: __init__
+
+    .. automethod:: load
