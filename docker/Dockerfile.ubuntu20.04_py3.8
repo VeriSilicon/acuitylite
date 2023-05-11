@@ -1,0 +1,48 @@
+FROM ubuntu:20.04
+# Install.
+
+# Tell debconf to run in non-interactive mode
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN echo "-----ide env setup-----" && \
+    apt-get update && apt-get install -y xorg openbox
+
+RUN echo "-----acuity env setup-----" && \
+    apt-get update && apt-get install -y gcc g++ gdb vim git htop openssh-server sudo python2 python3-pip python3 wget make build-essential
+
+RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ \
+    tensorflow==2.10.0 \
+    networkx==2.4 \
+    lmdb==0.93 \
+    onnx==1.12.0 \
+    onnxoptimizer==0.3.1 \
+    onnxruntime==1.12.1 \
+    dill==0.2.8.2 \
+    ruamel.yaml==0.15.81 \
+    ply==3.11 \
+    torch==1.5.1 \
+    scipy==1.6.3 \
+    Cython==0.29.21 \
+    flatbuffers==2.0 \
+    protobuf==3.19.1 \
+    opencv-python==4.6.0.66 \
+    pyinstaller==4.5.1 \
+    pytest \
+    XlsxWriter
+
+RUN echo "-----user account setup-----" && \
+    useradd -rm -d /home/builder -s /bin/bash -g root -G sudo -u 1000 builder && \
+    echo 'builder:builder' | chpasswd && \
+    echo 'root:root' | chpasswd
+
+USER builder
+ENV HOME /home/builder
+WORKDIR /home/builder
+# RUN service ssh start
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd","-D"]
+
+# customer
+# docker run -it -p 30022:22 -e DISPLAY=$IP:0 -v `pwd`:/home/builder --name acuity_ide --user builder --restart=always $IMAGE_HASH  "/bin/bash"
