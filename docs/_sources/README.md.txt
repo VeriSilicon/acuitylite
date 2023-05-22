@@ -5,8 +5,8 @@ Acuitylite support converting caffe/darknet/onnx/tensorflow/tflite models to TIM
 In addition, Acuitylite support asymmetric uint8 and symmetric int8 quantization.
 
 ### System Requirement
-- OS:  Ubuntu Linux 20.04 LTS 64-bit (recommend)
-- Python Version:  python3.8 (needed)
+- OS:  Ubuntu Linux 20.04 LTS 64-bit, Ubuntu Linux 22.04 LTS 64-bit
+- Python Version:  python3.8, python3.10
 
 ### Install
     pip install acuitylite
