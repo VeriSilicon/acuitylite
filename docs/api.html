@@ -33,19 +33,6 @@
             
   <section id="api">
 <h1>API<a class="headerlink" href="#api" title="Permalink to this heading">¶</a></h1>
-<section id="acuitymodel">
-<h2>AcuityModel<a class="headerlink" href="#acuitymodel" title="Permalink to this heading">¶</a></h2>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="acuitymodel.html#acuitymodel.AcuityModel" title="acuitymodel.AcuityModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acuitymodel.AcuityModel</span></code></a>(net)</p></td>
-<td><p>Support quantization, inference, exporting TIM_VX application for acuitylite network.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">acuitymodel</span></code></p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
-</section>
 <section id="importer">
 <h2>Importer<a class="headerlink" href="#importer" title="Permalink to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
@@ -84,14 +71,27 @@
 </tbody>
 </table>
 </section>
-<section id="quantizer">
-<h2>Quantizer<a class="headerlink" href="#quantizer" title="Permalink to this heading">¶</a></h2>
+<section id="quantization">
+<h2>Quantization<a class="headerlink" href="#quantization" title="Permalink to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="quantizer.html#quantizer.QuantizeType" title="quantizer.QuantizeType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantizer.QuantizeType</span></code></a>()</p></td>
-<td><p>Quantizer type for AcuityModel quantize method quantizer param, asymu8 = ASYMMETRIC_AFFINE_UINT8, pcq_symi8 = PERCHANNEL_SYMMETRIC_AFFINE_INT8</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="quantization.html#quantization.Quantization" title="quantization.Quantization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantization.Quantization</span></code></a>(model)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantizer</span></code></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantization</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="inference">
+<h2>Inference<a class="headerlink" href="#inference" title="Permalink to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="inference.html#inference.Inference" title="inference.Inference"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inference.Inference</span></code></a>(model)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">inference</span></code></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -140,9 +140,9 @@
 <p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#acuitymodel">AcuityModel</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#importer">Importer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#quantizer">Quantizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quantization">Quantization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#inference">Inference</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#exporter">Exporter</a></li>
 </ul>
 </li>

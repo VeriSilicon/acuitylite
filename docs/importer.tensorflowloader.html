@@ -31,15 +31,25 @@
             
   <dl class="py class">
 <dt class="sig sig-object py" id="importer.TensorflowLoader">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">importer.</span></span><span class="sig-name descname"><span class="pre">TensorflowLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_size_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importer.TensorflowLoader" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">importer.</span></span><span class="sig-name descname"><span class="pre">TensorflowLoader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importer.TensorflowLoader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Translates a Tensorflow model to Acuity formats.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="importer.TensorflowLoader.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_size_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importer.TensorflowLoader.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importer.TensorflowLoader.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> – The file path of the imported Tensorflow model file, a .pb file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="importer.TensorflowLoader.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_size_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#importer.TensorflowLoader.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load Tensorflow model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> – The file path of the imported Tensorflow model file, a .pb file.</p></li>
 <li><p><strong>inputs</strong> – Specify the input points of the Tensorflow graph, requries list type.
 Such as [‘input_point_1’, ‘input_point_2’].</p></li>
 <li><p><strong>input_size_list</strong> – The tensor shape sizes of the input points listed in the inputs argument,
@@ -49,16 +59,8 @@ the tensor shape sizes of two input points.</p></li>
 For example, [‘output_point_1’, ‘output_point_2’].</p></li>
 </ul>
 </dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="importer.TensorflowLoader.load">
-<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#importer.TensorflowLoader.load" title="Permalink to this definition">¶</a></dt>
-<dd><p>Load Tensorflow model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Acuity network.</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Acuity network.</p>
 </dd>
 </dl>
 </dd></dl>

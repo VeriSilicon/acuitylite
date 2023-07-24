@@ -38,41 +38,44 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">acuitylib.lite.acuitymodel</span> <span class="kn">import</span> <span class="n">AcuityModel</span>
-<span class="kn">from</span> <span class="nn">acuitylib.lite.importer</span> <span class="kn">import</span> <span class="n">TFLiteLoader</span>
-<span class="kn">from</span> <span class="nn">acuitylib.lite.exporter</span> <span class="kn">import</span> <span class="n">TimVxExporter</span>
+<span class="kn">from</span> <span class="nn">acuitylib.interface.importer</span> <span class="kn">import</span> <span class="n">TFLiteLoader</span>
+<span class="kn">from</span> <span class="nn">acuitylib.interface.exporter</span> <span class="kn">import</span> <span class="n">TimVxExporter</span>
+<span class="kn">from</span> <span class="nn">acuitylib.interface.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
 
 <span class="c1"># wget https://storage.googleapis.com/download.tensorflow.org/</span>
 <span class="c1"># models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz</span>
+
 
 <span class="n">mobilenet</span> <span class="o">=</span> <span class="s2">&quot;model/mobilenet_v1_1.0_224_quant.tflite&quot;</span>
 <span class="n">image0</span> <span class="o">=</span> <span class="s2">&quot;data/697.jpg&quot;</span>
 <span class="n">image1</span> <span class="o">=</span> <span class="s2">&quot;data/813.jpg&quot;</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">697</span><span class="p">,</span> <span class="mi">813</span><span class="p">]</span>
 
+
 <span class="c1"># data generator</span>
 <span class="k">def</span> <span class="nf">get_data</span><span class="p">():</span>
     <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="p">[</span><span class="n">image0</span><span class="p">,</span> <span class="n">image1</span><span class="p">]:</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">decode_image</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">image</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="o">-</span><span class="mf">128.0</span><span class="p">)</span><span class="o">/</span><span class="mf">128.0</span>  <span class="c1"># preprocess</span>
-        <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)}</span>
+        <span class="k">yield</span> <span class="n">inputs</span>
+
 
 <span class="k">def</span> <span class="nf">test_tflite_mobilenet</span><span class="p">():</span>
     <span class="c1"># no need to quantize using acuity lite for quant model</span>
     <span class="c1"># load tflite quant model</span>
-    <span class="n">importtflite</span> <span class="o">=</span> <span class="n">TFLiteLoader</span><span class="p">(</span><span class="n">mobilenet</span><span class="p">)</span>
-    <span class="n">acuitynet</span> <span class="o">=</span> <span class="n">importtflite</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
-    <span class="n">quantmodel</span> <span class="o">=</span> <span class="n">AcuityModel</span><span class="p">(</span><span class="n">acuitynet</span><span class="p">)</span>
+    <span class="n">quantmodel</span> <span class="o">=</span> <span class="n">TFLiteLoader</span><span class="p">(</span><span class="n">mobilenet</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 
-    <span class="c1"># quant model inference</span>
-    <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_data</span><span class="p">()]</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">quantmodel</span><span class="o">.</span><span class="n">inference</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">outs</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">assert</span> <span class="n">outs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="mf">0.9</span>
+    <span class="c1"># inference with quant model</span>
+    <span class="n">infer</span> <span class="o">=</span> <span class="n">Inference</span><span class="p">(</span><span class="n">quantmodel</span><span class="p">)</span>
+    <span class="n">infer</span><span class="o">.</span><span class="n">build_session</span><span class="p">()</span>  <span class="c1"># build inference session</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">get_data</span><span class="p">()):</span>
+        <span class="n">ins</span><span class="p">,</span> <span class="n">outs</span> <span class="o">=</span> <span class="n">infer</span><span class="o">.</span><span class="n">run_session</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># run inference session</span>
+        <span class="k">assert</span> <span class="n">outs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="mf">0.9</span>
 
     <span class="c1"># export tim-vx quant case</span>
     <span class="n">TimVxExporter</span><span class="p">(</span><span class="n">quantmodel</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;export_timvx/quant/mobilenet&#39;</span><span class="p">)</span>
+
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">test_tflite_mobilenet</span><span class="p">()</span>

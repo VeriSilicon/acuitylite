@@ -10,6 +10,9 @@ Acuitylite is an end-to-end neural-network deployment tool for embedded systems.
 Acuitylite support converting caffe/darknet/onnx/tensorflow/tflite model to TIM-VX/TFLite case.
 In addition, Acuitylite support asysmetric uint8 and sysmetric int8 quantization.
 
+Attention: We have introduced some important changes and updated the APIs that are not compatible with the version before Acuitylite6.20.0(include).
+Please read the document and demos carefully.
+
 Indices and tables
 ==================
 

@@ -1,0 +1,26 @@
+
+.. py:class:: quantization.Quantization
+
+    .. py:method:: __init__(model)
+
+    .. py:method:: quantize(input_generator_func, quantizer=QuantizerType.ASYMMETRIC_AFFINE, qtype='uint8', iteration=1, minimize_layer_error=False)
+
+        Usually 500~1000 pictures are needed. Do not perform quantization on acuity networks converted from TensorFlow Lite models that have been quantized.
+
+        :param input_generator_func:
+            A inputs data generator function, requires function type.
+        :param quantizer:
+            The quantizer to quantize network tensors. Get QuantizerType class, support QuantizeType.ASYMMETRIC_AFFINE and QuantizeType.PERCHANNEL_SYMMETRIC_AFFINE now.
+        :param qtype:
+            A string, the qtype to quantizer. Support uint8 for ASYMMETRIC_AFFINE and int8 for PERCHANNEL_SYMMETRIC_AFFINE now.
+        :param iteration:
+            The number of sample image batches. requires int type.
+        :param minimize_layer_error:
+            Minimize the quantization error, requires bool type. If set it will improve quantization accuracy, but take more time.
+
+
+.. autoclass:: quantizer.QuantizerType
+
+    :members: ASYMMETRIC_AFFINE
+    :members: PERCHANNEL_SYMMETRIC_AFFINE
+
