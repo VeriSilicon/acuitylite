@@ -30,34 +30,26 @@
           <div class="body" role="main">
             
   <dl class="py class">
-<dt class="sig sig-object py" id="exporter.TFLiteExporter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">exporter.</span></span><span class="sig-name descname"><span class="pre">TFLiteExporter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exporter.TFLiteExporter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export an Acuity model into an TFLite application.
-reference: <a class="reference external" href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite">https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite</a></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="exporter.TFLiteExporter.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exporter.TFLiteExporter.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>model</strong> – AcuityModel object.</p>
-</dd>
-</dl>
-</dd></dl>
+<dt class="sig sig-object py" id="quantization.Quantization">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">quantization.</span></span><span class="sig-name descname"><span class="pre">Quantization</span></span><a class="headerlink" href="#quantization.Quantization" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="quantization.Quantization.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantization.Quantization.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="exporter.TFLiteExporter.export">
-<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exporter.TFLiteExporter.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export TFLite application.</p>
+<dt class="sig sig-object py" id="quantization.Quantization.quantize">
+<span class="sig-name descname"><span class="pre">quantize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_generator_func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">QuantizerType.ASYMMETRIC_AFFINE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'uint8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iteration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimize_layer_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#quantization.Quantization.quantize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Usually 500~1000 pictures are needed. Do not perform quantization on acuity networks converted from TensorFlow Lite models that have been quantized.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>output</strong> – The directory of the exported applications with the prefix specified.
-Use the syntax ‘&lt;output directory&gt;/&lt;prefix&gt;’. Where:
-Output directory: The directory of the generated outputs including subdirectories and files.
-Prefix: The prefix of the generated subdirectories and files.
-For example, “export_tflite/uint8/lenet”</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p></p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_generator_func</strong> – A inputs data generator function, requires function type.</p></li>
+<li><p><strong>quantizer</strong> – The quantizer to quantize network tensors. Get QuantizerType class, support QuantizeType.ASYMMETRIC_AFFINE and QuantizeType.PERCHANNEL_SYMMETRIC_AFFINE now.</p></li>
+<li><p><strong>qtype</strong> – A string, the qtype to quantizer. Support uint8 for ASYMMETRIC_AFFINE and int8 for PERCHANNEL_SYMMETRIC_AFFINE now.</p></li>
+<li><p><strong>iteration</strong> – The number of sample image batches. requires int type.</p></li>
+<li><p><strong>minimize_layer_error</strong> – Minimize the quantization error, requires bool type. If set it will improve quantization accuracy, but take more time.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -136,7 +128,7 @@ For example, “export_tflite/uint8/lenet”</p>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
-      <a href="_sources/exporter.tflite.rst.txt"
+      <a href="_sources/quantization.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

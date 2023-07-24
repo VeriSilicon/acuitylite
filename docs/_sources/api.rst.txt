@@ -1,14 +1,6 @@
 API
 ===
 
-AcuityModel
------------
-.. autosummary:: acuitymodel.AcuityModel
-
-    .. toctree::
-       :maxdepth: 2
-
-        acuitymodel
 
 Importer
 --------
@@ -47,14 +39,23 @@ Importer
 
         importer.tfliteloader
 
-Quantizer
+Quantization
 ---------
-.. autosummary:: quantizer.QuantizeType
+.. autosummary:: quantization.Quantization
 
     .. toctree::
        :maxdepth: 2
 
-        quantizer
+        quantization
+
+Inference
+---------
+.. autosummary:: inference.Inference
+
+    .. toctree::
+       :maxdepth: 2
+
+        inference
 
 Exporter
 --------

@@ -36,10 +36,11 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">acuitylib.lite.acuitymodel</span> <span class="kn">import</span> <span class="n">AcuityModel</span>
-<span class="kn">from</span> <span class="nn">acuitylib.lite.importer</span> <span class="kn">import</span> <span class="n">TensorflowLoader</span>
-<span class="kn">from</span> <span class="nn">acuitylib.lite.exporter</span> <span class="kn">import</span> <span class="n">TFLiteExporter</span>
-<span class="kn">from</span> <span class="nn">acuitylib.lite.quantizer</span> <span class="kn">import</span> <span class="n">QuantizeType</span>
+<span class="kn">from</span> <span class="nn">acuitylib.interface.importer</span> <span class="kn">import</span> <span class="n">TensorflowLoader</span>
+<span class="kn">from</span> <span class="nn">acuitylib.interface.exporter</span> <span class="kn">import</span> <span class="n">TFLiteExporter</span>
+<span class="kn">from</span> <span class="nn">acuitylib.interface.quantization</span> <span class="kn">import</span> <span class="n">Quantization</span><span class="p">,</span> <span class="n">QuantizerType</span>
+<span class="kn">from</span> <span class="nn">acuitylib.interface.inference</span> <span class="kn">import</span> <span class="n">Inference</span>
+
 
 <span class="c1"># prepare</span>
 <span class="n">mobilenet</span> <span class="o">=</span> <span class="s2">&quot;model/mobilenet_v1.pb&quot;</span>
@@ -47,32 +48,38 @@
 <span class="n">image1</span> <span class="o">=</span> <span class="s2">&quot;data/813.jpg&quot;</span>
 <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">697</span><span class="p">,</span> <span class="mi">813</span><span class="p">]</span>
 
+
 <span class="c1"># data generator</span>
 <span class="k">def</span> <span class="nf">get_data</span><span class="p">():</span>
     <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="p">[</span><span class="n">image0</span><span class="p">,</span> <span class="n">image1</span><span class="p">]:</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">decode_image</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">image</span><span class="p">))</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="o">-</span><span class="mf">128.0</span><span class="p">)</span><span class="o">/</span><span class="mf">128.0</span>  <span class="c1"># preprocess</span>
-        <span class="k">yield</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)}</span>
+        <span class="k">yield</span> <span class="n">inputs</span>
+
 
 <span class="k">def</span> <span class="nf">test_tensorflow_mobilenet</span><span class="p">():</span>
     <span class="c1"># load tensorflow model</span>
-    <span class="n">acuitynet</span> <span class="o">=</span> <span class="n">TensorflowLoader</span><span class="p">(</span><span class="n">mobilenet</span><span class="p">,</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">TensorflowLoader</span><span class="p">(</span><span class="n">mobilenet</span><span class="p">,</span>
                                     <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">],</span>
                                     <span class="n">input_size_list</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">3</span><span class="p">]],</span>
                                     <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MobilenetV1/Logits/SpatialSqueeze&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">AcuityModel</span><span class="p">(</span><span class="n">acuitynet</span><span class="p">)</span>
-    <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_data</span><span class="p">()]</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">quantizer</span><span class="o">=</span><span class="n">QuantizeType</span><span class="o">.</span><span class="n">asymu8</span><span class="p">,</span> <span class="n">iteration</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="c1"># quant model inference</span>
-    <span class="n">data_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_data</span><span class="p">()]</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">inference</span><span class="p">(</span><span class="n">data_list</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">outs</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">assert</span> <span class="n">outs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="mf">0.9</span>
+    <span class="c1"># quantization</span>
+    <span class="n">quantizer</span> <span class="o">=</span> <span class="n">QuantizerType</span><span class="o">.</span><span class="n">ASYMMETRIC_AFFINE</span>
+    <span class="n">qtype</span> <span class="o">=</span> <span class="s1">&#39;uint8&#39;</span>
+    <span class="n">Quantization</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">input_generator_func</span><span class="o">=</span><span class="n">get_data</span><span class="p">,</span> <span class="n">quantizer</span><span class="o">=</span><span class="n">quantizer</span><span class="p">,</span> <span class="n">qtype</span><span class="o">=</span><span class="n">qtype</span><span class="p">,</span> <span class="n">iteration</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># inference with quant model</span>
+    <span class="n">infer</span> <span class="o">=</span> <span class="n">Inference</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+    <span class="n">infer</span><span class="o">.</span><span class="n">build_session</span><span class="p">()</span>  <span class="c1"># build inference session</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">get_data</span><span class="p">()):</span>
+        <span class="n">ins</span><span class="p">,</span> <span class="n">outs</span> <span class="o">=</span> <span class="n">infer</span><span class="o">.</span><span class="n">run_session</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># run inference session</span>
+        <span class="k">assert</span> <span class="n">outs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="mf">0.99</span>
 
     <span class="c1"># export tflite quant case</span>
     <span class="n">TFLiteExporter</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s1">&#39;export_tflite/asymu8/mobilenet.tflite&#39;</span><span class="p">)</span>
+
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">test_tensorflow_mobilenet</span><span class="p">()</span>

@@ -1,0 +1,8 @@
+
+.. autoclass:: inference.Inference
+
+    .. automethod:: __init__
+
+    .. automethod:: build_session
+
+    .. automethod:: run_session

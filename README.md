@@ -2,11 +2,15 @@
 
 Acuitylite is an end-to-end neural-network deployment tool for embedded systems.<br/>
 Acuitylite support converting caffe/darknet/onnx/tensorflow/tflite models to TIM-VX/TFLite cases.
-In addition, Acuitylite support asymmetric uint8 and symmetric int8 quantization.
+In addition, Acuitylite support asymmetric uint8 and symmetric int8 quantization.<br/>
+
+Attention: We have introduced some important changes and updated the APIs that are not compatible with the version before Acuitylite6.20.0(include).
+Please read the document and demos carefully.
 
 ### System Requirement
-- OS:  Ubuntu Linux 20.04 LTS 64-bit (recommend)
-- Python Version:  python3.8 (needed)
+- OS:<br/>
+    Ubuntu Linux 20.04 LTS 64-bit(python3.8)<br/>
+    Ubuntu Linux 22.04 LTS 64-bit(python3.10)
 
 ### Install
     pip install acuitylite
