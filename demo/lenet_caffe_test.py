@@ -42,7 +42,7 @@ def test_caffe_lenet():
     # perchanneli8 quantization
     quantizer = QuantizerType.PERCHANNEL_SYMMETRIC_AFFINE
     qtype = 'int8'
-    Quantization(model).quantize(input_generator_func=get_data, quantizer=quantizer, qtype=qtype, iteration=1)
+    Quantization(model).quantize(input_generator_func=get_data, quantizer=quantizer, qtype=qtype, iterations=1)
 
     # inference with quantized model
     infer = Inference(model)
