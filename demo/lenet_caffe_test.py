@@ -2,8 +2,7 @@
 import tensorflow as tf
 import numpy as np
 from acuitylib.interface.importer import CaffeLoader
-from acuitylib.interface.exporter import TimVxExporter
-from acuitylib.interface.exporter import TFLiteExporter
+from acuitylib.interface.exporter import TimVxExporter, TFLiteExporter
 from acuitylib.interface.quantization import Quantization, QuantizerType
 from acuitylib.interface.inference import Inference
 

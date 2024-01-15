@@ -30,13 +30,12 @@
           <div class="body" role="main">
             
   <dl class="py class">
-<dt class="sig sig-object py" id="exporter.TimVxExporter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">exporter.</span></span><span class="sig-name descname"><span class="pre">TimVxExporter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exporter.TimVxExporter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export an Acuity model into an TIM-VX application.
-reference: <a class="reference external" href="https://github.com/VeriSilicon/TIM-VX">https://github.com/VeriSilicon/TIM-VX</a></p>
+<dt class="sig sig-object py" id="exporter.OvxlibExporter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">exporter.</span></span><span class="sig-name descname"><span class="pre">OvxlibExporter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exporter.OvxlibExporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export an Acuity model into an Ovxlib application.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="exporter.TimVxExporter.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exporter.TimVxExporter.__init__" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="exporter.OvxlibExporter.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exporter.OvxlibExporter.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>model</strong> – AcuityModel object.</p>
@@ -45,19 +44,16 @@ reference: <a class="reference external" href="https://github.com/VeriSilicon/TI
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="exporter.TimVxExporter.export">
-<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_def_json_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exporter.TimVxExporter.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export TIM-VX application.</p>
+<dt class="sig sig-object py" id="exporter.OvxlibExporter.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#exporter.OvxlibExporter.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export Ovxlib application.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>output</strong> – The directory of the exported applications with the prefix specified.
+<dd class="field-odd"><p><strong>output</strong> – The directory of the exported applications with the prefix specified.
 Use the syntax ‘&lt;output directory&gt;/&lt;prefix&gt;’. Where:
 Output directory: The directory of the generated outputs including subdirectories and files.
 Prefix: The prefix of the generated subdirectories and files.
-For example, “export_timvx/uint8/lenet”</p></li>
-<li><p><strong>api_def_json_path</strong> – The path to specify TIM-VX api defined json files.</p></li>
-</ul>
+For example, “export_ovxlib/uint8/lenet”</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p></p>
@@ -139,7 +135,7 @@ For example, “export_timvx/uint8/lenet”</p></li>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
       
       |
-      <a href="_sources/exporter.tim-vx.rst.txt"
+      <a href="_sources/exporter.ovxlib.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
