@@ -4,7 +4,7 @@ Acuitylite is an end-to-end neural-network deployment tool for embedded systems.
 Acuitylite support converting caffe/darknet/onnx/tensorflow/tflite models to TIM-VX/TFLite cases.
 In addition, Acuitylite support asymmetric uint8 and symmetric int8 quantization.<br/>
 
-Attention: We have introduced some important changes and updated the APIs that are not compatible with the version before Acuitylite6.20.0(include).
+Attention: We have introduced some important changes and updated the APIs that are not compatible with the version before Acuitylite6.21.0(include).
 Please read the document and demos carefully.
 
 ### System Requirement
@@ -32,6 +32,17 @@ Please read the document and demos carefully.
 Tips: You can export a TFLite app and using [tflite-vx-delegate](https://github.com/VeriSilicon/tflite-vx-delegate)
 to run on TIM-VX if the exported TIM-VX app does not meet your requirements.
 
+### How to generate nbg and TIM-VX case
+When you need generate TIM-VX case and nbg, please set the export() function's param pack_nbg_unify=True.
+Such as: TimVxExporter(model).export(pack_nbg_unify=True), it will use our default SDK.
+If you want to use your own SDK and licence, please set the param of export() viv_sdk, licence.
+Such as: TimVxExporter(model).export(pack_nbg_unify=True, viv_sdk=your_sdk_path, licence=path_of_licence_txt)
+
+Attention: your sdk directory structure must strictly follow the directory structure of acuitylib/vsi_sdk!!!
+your sdk need satisfy the structure of "your_sdk_path/build/install", "your_sdk_path/prebuilt-sdk/x86_64_linux",
+otherwise the path may have problems.
+And the licence content is the device target which you want to use.
+
 ### How to run TIM-VX case
 The exported TIM-VX case supports both make and cmake.<br/>
 Please set environment for build and run case:<br/>
@@ -41,6 +52,17 @@ Please set environment for build and run case:<br/>
 
 Attention: The TIM_VX_DIR path should include lib and header files of TIM-VX.
 You can refer [TIM-VX](https://github.com/VeriSilicon/TIM-VX) to build TIM-VX.
+
+### How to generate nbg by Ovxlib
+When you need generate nbg, please use OvxlibExporter class and set the export() function's param pack_nbg_only=True.
+Such as: OvxlibExporter(model).export(pack_nbg_only=True), it will use our default SDK.
+If you want to use your own SDK and licence, please set the "viv_sdk" and "licence" params of export() function.
+Such as: OvxlibExporter(model).export(pack_nbg_only=True, viv_sdk=your_sdk_path, licence=path_of_licence_txt)
+
+Attention: your sdk directory structure must strictly follow the directory structure of  acuitylib/vsi_sdk!!!
+your sdk need satisfy the structure of "your_sdk_path/prebuilt-sdk/x86_64_linux", otherwise the path may have problems.
+The content of licence is the device target which you want to use.
+
 
 ### Support
 Create issue on github or email to ML_Support@verisilicon.com
