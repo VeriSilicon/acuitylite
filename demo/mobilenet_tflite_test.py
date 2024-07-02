@@ -21,8 +21,7 @@ def get_data():
     for image in [image0, image1]:
         arr = tf.io.decode_image(tf.io.read_file(image)).numpy().reshape(1, 224, 224, 3).astype(np.float32)
         arr = (arr-128.0)/128.0  # preprocess
-        # quantize arr as the quantized input for quantized model(new feature begin from 6.27.0)
-        arr = np.rint(arr / 0.0078125) + 128
+        arr = np.rint(arr / 0.0078125) + 128  # quantize arr as quantized input for quantized model(begin from 6.27.0)
         inputs = {'input': np.array(arr, dtype=np.uint8)}
         yield inputs
 
