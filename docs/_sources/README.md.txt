@@ -13,7 +13,8 @@ Please read the document and demos carefully.
     Ubuntu Linux 22.04 LTS 64-bit(python3.10)
 
 ### Install
-    pip install acuitylite
+    1. build the recommended docker image and run a container
+    2. pip install acuitylite --no-deps
 
 ### Document
     Reference: https://verisilicon.github.io/acuitylite
