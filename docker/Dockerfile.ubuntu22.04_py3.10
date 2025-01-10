@@ -11,22 +11,21 @@ RUN echo "-----acuity env setup-----" && \
     apt-get update && apt-get install -y gcc g++ gdb vim git htop openssh-server sudo python2 python3-pip python3 wget make cmake unzip build-essential
 
 RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ --use-deprecated=html5lib \
-    tensorflow==2.10.0 \
+    tensorflow==2.17.0 \
     networkx==2.4 \
-    lmdb==1.1.0 \
-    onnx==1.12.0 \
-    onnxoptimizer==0.3.1 \
-    onnxruntime==1.12.1 \
+    onnx==1.16.2 \
+    onnxoptimizer==0.3.13 \
+    onnxruntime==1.19.2 \
     dill==0.2.8.2 \
-    ruamel.yaml==0.16.0 \
+    ruamel.yaml==0.17.40 \
     ply==3.11 \
-    torch==1.12.0 \
-    scipy==1.7.2 \
+    torch==2.3.0 \
+    scipy==1.8.0 \
     Cython==0.29.32 \
-    flatbuffers==2.0 \
-    protobuf==3.19.1 \
+    flatbuffers==24.3.25 \
+	protobuf==3.20.3 \
     opencv-python==4.6.0.66 \
-    pyinstaller==5.7.0 \
+    pyinstaller==5.13.0 \
     pytest \
     XlsxWriter
 
