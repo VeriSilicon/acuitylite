@@ -1,7 +1,7 @@
 demo.tflite
 ===========
 
-**ATTENTION: No need to quantize using acuity lite for quant model**
+**ATTENTION: No need to quantize using acuity lite for quantized model**
 
 Download model::
 
