@@ -11,12 +11,12 @@ RUN echo "-----acuity env setup-----" && \
     apt-get update && apt-get install -y gcc g++ gdb vim git htop openssh-server sudo python2 python3-pip python3 wget make build-essential
 
 RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ \
-    tensorflow==2.10.0 \
+    tensorflow==2.12.0 \
     networkx==2.4 \
     lmdb==0.93 \
-    onnx==1.12.0 \
-    onnxoptimizer==0.3.1 \
-    onnxruntime==1.12.1 \
+    onnx==1.14.0 \
+    onnxoptimizer==0.3.13 \
+    onnxruntime==1.15.0 \
     dill==0.2.8.2 \
     ruamel.yaml==0.15.81 \
     ply==3.11 \
@@ -24,9 +24,9 @@ RUN pip3 install -i https://mirrors.aliyun.com/pypi/simple/ \
     scipy==1.6.3 \
     Cython==0.29.21 \
     flatbuffers==2.0 \
-    protobuf==3.19.1 \
+    protobuf==3.20.3 \
     opencv-python==4.6.0.66 \
-    pyinstaller==4.5.1 \
+    pyinstaller==5.13.0 \
     pytest \
     XlsxWriter
 

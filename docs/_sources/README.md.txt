@@ -7,19 +7,20 @@ In addition, Acuitylite support asymmetric uint8 and symmetric int8 quantization
 Attention: We have introduced some important changes and updated the APIs that are not compatible with the version before Acuitylite6.21.0(include).
 Please read the document and demos carefully.
 
-### System Requirement
+## System Requirement
 - OS:<br/>
     Ubuntu Linux 20.04 LTS 64-bit(python3.8)<br/>
-    Ubuntu Linux 22.04 LTS 64-bit(python3.10)
+    Ubuntu Linux 22.04 LTS 64-bit(python3.10)<br/>
+    Ubuntu Linux 24.04 LTS 64-bit(python3.12)
 
-### Install
+## Install
     1. build the recommended docker image and run a container
     2. pip install acuitylite --no-deps
 
-### Document
+## Document
     Reference: https://verisilicon.github.io/acuitylite
 
-### Framework Support
+## Framework Support
 - Importer:
     [Caffe](https://github.com/BVLC/caffe),
     [Darknet](https://github.com/pjreddie/darknet),
@@ -33,7 +34,7 @@ Please read the document and demos carefully.
 Tips: You can export a TFLite app and using [tflite-vx-delegate](https://github.com/VeriSilicon/tflite-vx-delegate)
 to run on TIM-VX if the exported TIM-VX app does not meet your requirements.
 
-### How to generate nbg and TIM-VX case
+## How to generate nbg and TIM-VX case
 When you need generate TIM-VX case and nbg, please set the export() function's param pack_nbg_unify=True.
 Such as: TimVxExporter(model).export(pack_nbg_unify=True), it will use our default SDK.
 If you want to use your own SDK and licence, please set the param of export() viv_sdk, licence.
@@ -44,7 +45,7 @@ your sdk need satisfy the structure of "your_sdk_path/build/install", "your_sdk_
 otherwise the path may have problems.
 And the licence content is the device target which you want to use.
 
-### How to run TIM-VX case
+## How to run TIM-VX case
 The exported TIM-VX case supports both make and cmake.<br/>
 Please set environment for build and run case:<br/>
 - TIM_VX_DIR=/path/to/tim-vx/build/install
@@ -54,7 +55,7 @@ Please set environment for build and run case:<br/>
 Attention: The TIM_VX_DIR path should include lib and header files of TIM-VX.
 You can refer [TIM-VX](https://github.com/VeriSilicon/TIM-VX) to build TIM-VX.
 
-### How to generate nbg by Ovxlib
+## How to generate nbg by Ovxlib
 When you need generate nbg, please use OvxlibExporter class and set the export() function's param pack_nbg_only=True.
 Such as: OvxlibExporter(model).export(pack_nbg_only=True), it will use our default SDK.
 If you want to use your own SDK and licence, please set the "viv_sdk" and "licence" params of export() function.
@@ -65,5 +66,5 @@ your sdk need satisfy the structure of "your_sdk_path/prebuilt-sdk/x86_64_linux"
 The content of licence is the device target which you want to use.
 
 
-### Support
+## Support
 Create issue on github or email to ML_Support@verisilicon.com

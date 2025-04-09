@@ -40,7 +40,7 @@ Importer
         importer.tfliteloader
 
 Quantization
----------
+------------
 .. autosummary:: quantization.Quantization
 
     .. toctree::
